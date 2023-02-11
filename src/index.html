@@ -2,8 +2,64 @@
 <html lang="ru">
 <!-- Head -->
 @@include('html/_head.html', {"title": "Резюме"})
+<style>
+    #preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 100vw;
+        z-index: 1000;
+        background-color: #f0eeed;
+        display: flex;
+        align-items: center;
+        justify-content: center
+    }
+
+    .lds-dual-ring {
+        width: 80px;
+        height: 80px;
+    }
+
+    .lds-dual-ring:after {
+        content: " ";
+        display: block;
+        width: 64px;
+        height: 64px;
+        margin: 8px;
+        border-radius: 50%;
+        border: 10px solid #c92c6d;
+        border-color: #c92c6d transparent #c92c6d transparent;
+        animation: lds-dual-ring 1.2s linear infinite;
+    }
+
+    @keyframes lds-dual-ring {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+</style>
 
 <body>
+    <div id="preloader">
+        <div class="lds-dual-ring"></div>
+    </div>
+    <!-- Выключение прелодера при загрузке страницы -->
+    <script>
+        const preloader = document.getElementById('preloader');
+        window.onload = () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            })
+            preloader.style.display = 'none';
+        }
+    </script>
+    <!-- ------------------------------------------- -->
     <div class="wrapper container">
         <!-- Header -->
         @@include('./html/_header.html', {name: 'Охватюк Евгений', position: 'Frontend Developer'})
@@ -32,12 +88,25 @@
                     </svg>
                     <span class="content">About</span>
                 </h2>
-                <p class="about__content">Банальные, но неопровержимые выводы, а также акционеры крупнейших компаний
-                    могут быть в равной степени предоставлены сами себе. Сложно сказать, почему сделанные на базе
-                    интернет-аналитики выводы, превозмогая сложившуюся непростую экономическую ситуацию, представлены в
-                    исключительно положительном свете. Наше дело не так однозначно, как может показаться: семантический
-                    разбор внешних противодействий, в своём классическом представлении, допускает внедрение
-                    своевременного выполнения сверхзадачи.</p>
+                <div class="about__content">
+                    <p>Frontend разработчик с опытом веб-разработки более 1 года (некоммерческий
+                        опыт). Люблю разрабатывать красивые и адаптивные веб-сайты с использованием семантических тегов.
+                        Владею <b>HTML, CSS (также препроцессор SASS), JavaScript (включая синтаксис ES6)</b>.
+                        В
+                        последние
+                        месяцы
+                        пишу приложения с использованием библиотеки <b>React</b>. На данный момент изучаю такие
+                        технологии
+                        как
+                        <b>Redux и TypeScript</b>.
+                    </p>
+                    <p>Имею небольшой опыт написания серверной части приложений с использованием <b>Node.js
+                            (Express)</b>. Обладаю некоторыми знаниями в <b>SQL</b>, а именно создание базы данных и
+                        выполнение
+                        SQL-запросов к ней (для своих целей использовал PostgreSQL).</p>
+                    <p>Учусь в колледже (4 курс) на специальности Программное Обеспечение Информационных Технологий.
+                    </p>
+                </div>
             </section>
             <div class="few-sections">
                 <section class="section common">
@@ -59,10 +128,22 @@
                     </h2>
                     <div class="common__content">
                         <ul class="common__list">
-                            <li>Item 1</li>
-                            <li>Item 2</li>
-                            <li>Item 3</li>
-                            <li>Item 4</li>
+                            <li>Возраст: <span id="age" class="answer"></span></li>
+                            <!-- СКРИПТ ДЛЯ РАССЧЕТА ВОЗРАСТА -->
+                            <script>
+                                const age = document.getElementById('age');
+                                // Даты
+                                const birthDate = new Date(2004, 5, 29);
+                                const now = new Date();
+                                // Разница дат в миллисекундах
+                                const dataeDiff = Math.abs(now.getTime() - birthDate.getTime());
+                                age.textContent = Math.floor(dataeDiff / (1000 * 3600 * 24 * 365));
+                            </script>
+                            <!-- ----------------------------- -->
+                            <li>Место учебы: <a class="answer" href="http://mtec.by/ru/" target="_blank">МТЭК</a></li>
+                            <li>Специальность: <span class="answer">ПОИТ</span></li>
+                            <li style="font-style: italic; font-weight: 700; line-height: 1;">Коммерческий опыт
+                                отсутствует</li>
                         </ul>
                     </div>
                 </section>
@@ -80,10 +161,12 @@
                     </h2>
                     <div class="skills__content">
                         <ul class="skills__list">
-                            <li>Item 1</li>
-                            <li>Item 2</li>
-                            <li>Item 3</li>
-                            <li>Item 4</li>
+                            <li>HTML5</li>
+                            <li>CSS / SCSS</li>
+                            <li>JavaScript / ES6</li>
+                            <li>React.js</li>
+                            <li>Redux <span class="new">(New)</span></li>
+                            <li>TypeScript <span class="new">(New)</span></li>
                         </ul>
                     </div>
                 </section>
@@ -99,12 +182,7 @@
                         <span class="content">English</span>
                     </h2>
                     <div class="english__content">
-                        <ul class="english__list">
-                            <li>Item 1</li>
-                            <li>Item 2</li>
-                            <li>Item 3</li>
-                            <li>Item 4</li>
-                        </ul>
+                        <div>Уровень английского языка: <span class="answer">A2-B1</span></div>
                     </div>
                 </section>
                 <section class="section links">
